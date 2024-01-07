@@ -12,6 +12,8 @@ import axios from 'axios'
 import { useEffect, useState } from "react";
 import PieChart from "./PieChart";
 import BarChart from "./BarChart";
+import FullScreenSpinner from "@/components/Spinner";
+import MyTable from "./Table";
 export const revalidate =1;
 export default function Home() {
 
@@ -31,6 +33,7 @@ export default function Home() {
       .reduce((acc:any, party:any) => {
         // Sum up the votes for each party
         acc[party.name] = (acc[party.name] || 0) + party.vote;
+        
         return acc;
       }, {}))
       setAllInfo(response.data)
@@ -89,13 +92,16 @@ export default function Home() {
       <div style={{width:"100%", color:"white"}} className=" font-bold size-11 content-center justify-center ">Total Counts:</div>
       <PieChart datas={Object.values(totalCounts)} party={Object.keys(totalCounts)} />
       <BarChart datas={Object.values(totalCounts)} party={Object.keys(totalCounts)} />
+      <MyTable voteCounts={totalCounts}/>
      </div>
     {/* <Button onPress={handleSubmit}>
       Submit
     </Button> */}
+    
+
      
      
      {/* </ButtonGroup> */}
     </main>
-  ):<>Loading</>
+  ):<><FullScreenSpinner/></>
 }
