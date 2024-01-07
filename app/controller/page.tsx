@@ -17,7 +17,7 @@ export default function Home() {
 
 
   const getVoteCounts=async () => {
-    console.log(localStorage.getItem("location"))
+    // console.log(localStorage.getItem("location"))
     axios.defaults.baseURL = "https://shenbag-voting-app3.onrender.com"
    
     const url=`/api/location/`
@@ -43,9 +43,9 @@ export default function Home() {
   }
   
   const router=useRouter()
-  if(localStorage.getItem("pass")!="sakib_is_awesome"){
-    router.push("./login")
-  }
+  // if(localStorage.getItem("pass")!="sakib_is_awesome"){
+  //   router.push("./login")
+  // }
   
   
   const [totalCounts,setCount]=useState(null)
