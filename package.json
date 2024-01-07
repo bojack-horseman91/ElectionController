@@ -2,7 +2,7 @@
   "name": "election_controller",
   "version": "0.1.0",
   "private": true,
-  "proxy":"https://shenbag-voting-app3.onrender.com/",
+  "proxy": "https://shenbag-voting-app3.onrender.com/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,6 +13,7 @@
     "@nextui-org/react": "^2.2.9",
     "axios": "^1.6.4",
     "chart.js": "^4.4.1",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "framer-motion": "^10.17.4",
     "next": "14.0.4",
     "react": "^18",

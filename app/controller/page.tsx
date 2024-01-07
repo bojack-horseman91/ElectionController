@@ -17,18 +17,18 @@ export default function Home() {
 
 
   const getVoteCounts=async () => {
-    // console.log(localStorage.getItem("location"))
+    console.log(localStorage.getItem("location"))
     axios.defaults.baseURL = "https://shenbag-voting-app3.onrender.com"
    
     const url=`/api/location/`
     try {
-      // console.log(url)
+      console.log(url)
       const response = await axios.get(url)
       // setCount(response.data.map((loc)=>{return {"location":loc.location,"votes":loc.vote_count}}))
       // setMyCount(response.data[0].vote_count.map((item)=>item.vote))
-      setCount(response.data.map((entry) => entry.vote_count)
+      setCount(response.data.map((entry:any) => entry.vote_count)
       .flat() // Flatten the array of arrays
-      .reduce((acc, party) => {
+      .reduce((acc:any, party:any) => {
         // Sum up the votes for each party
         acc[party.name] = (acc[party.name] || 0) + party.vote;
         return acc;
@@ -66,17 +66,7 @@ export default function Home() {
   },[totalCounts])
   
 
-const onChangeHandler=(val,indx)=>{
-  const newCount=voteCounts.map((v,i)=>{
-    if(i==indx){
-      v.vote=Math.max(parseInt(val),0)
-    }
-    return v
-  }
-  )
-  // console.log(newCount)
-  setCount(newCount)
-}
+
   // const router=useRouter()
   // const handleSubmit=()=>{
   //   sendVotes() 

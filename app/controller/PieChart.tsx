@@ -1,23 +1,33 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 'use client'
+// @ts-ignore
 import React, { useEffect,useRef } from "react"
 import { Chart } from "chart.js/auto"
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 interface PieChartProps{
-    party:[]
-    datas:[]
+    party:any[]
+    datas:any[]
 }
 
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const PieChart:React.FC<PieChartProps>=({party,datas})=>{
-
-
+    console.log("what?")
+    Chart.register(ChartDataLabels);
+    // Chart.defaults.font.size = 10;
+    // Chart.defaults.set('plugins.datalabels', {
+    //     color: '#FE777B'
+    //   });
     const chartRef=useRef(null);
     useEffect(
         ()=>{
             console.log(chartRef)
             if(chartRef.current){
-                
+                // const current:any=chartRef.current
                 const context=chartRef.current.getContext("2d");
+                // var chart:any=current.chart
                 console.log(context)
                 if(chartRef.current.chart){
                     chartRef.current.chart.destroy()
@@ -48,8 +58,15 @@ const PieChart:React.FC<PieChartProps>=({party,datas})=>{
                                 'rgb(153, 102, 255)',
                                 'rgb(201, 203, 207)'
                               ],
-                            borderWidth: 1
+                            borderWidth: 1,
+                            hidden:false
+                        
                         }]
+                    },
+                    plugins: [ChartDataLabels],
+                    options: {
+                    
+                       
                     }
                 })
                 chartRef.current.chart=newChart

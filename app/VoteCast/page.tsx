@@ -57,7 +57,7 @@ export default function Home() {
   }
   
   
-  const [voteCounts,setCount]=useState(null)
+  const [voteCounts,setCount]=useState(null as any)
   const [myCount,setMyCount]=useState([])
   const [smt,setSmt]=useState(1)
   // const [password,setPassword]=useState("")
@@ -69,16 +69,16 @@ export default function Home() {
 
   },[voteCounts])
 
-const onChangeHandler=(val,indx)=>{
-  const newCount=voteCounts.map((v,i)=>{
-    if(i==indx){
-      v.vote=Math.max(parseInt(val),0)
+const onChangeHandler=(val:any,indx:number)=>{
+  
+  const newCount = (voteCounts?.map((v:any, i:number) => {
+    if (i === indx) {
+      v.vote = Math.max(parseInt(val), 0);
     }
-    return v
-  }
-  )
-  // console.log(newCount)
-  setCount(newCount)
+    return v;
+  })) || [];
+
+  setCount(newCount);
 }
   // const router=useRouter()
   const handleSubmit=()=>{
@@ -108,7 +108,7 @@ const onChangeHandler=(val,indx)=>{
       </TableHeader>
       <TableBody>
         {
-          voteCounts.map((cnt,indx)=>{
+          voteCounts.map((cnt:any,indx:number)=>{
             return (
               <TableRow key={indx}>
           <TableCell>{cnt.name}</TableCell>

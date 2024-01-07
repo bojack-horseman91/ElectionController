@@ -1,10 +1,12 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 'use client'
 import React, { useEffect,useRef } from "react"
 import { Chart } from "chart.js/auto"
 
 interface PieChartProps{
-    party:[]
-    datas:[]
+    party:any[]
+    datas:any[]
 }
 
 
@@ -19,7 +21,7 @@ const BarChart:React.FC<PieChartProps>=({party,datas})=>{
                 
                 const context=chartRef.current.getContext("2d");
                 console.log(context)
-                if(chartRef.current.chart){
+                if(chartRef.current.chart ){
                     chartRef.current.chart.destroy()
                 }
                 
@@ -50,7 +52,8 @@ const BarChart:React.FC<PieChartProps>=({party,datas})=>{
                               ],
                             borderWidth: 1
                         }]
-                    }
+                    },
+                    
                 })
                 chartRef.current.chart=newChart
 
