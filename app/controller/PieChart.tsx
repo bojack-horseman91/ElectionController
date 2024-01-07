@@ -1,7 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 'use client'
-// @ts-ignore
 import React, { useEffect,useRef } from "react"
 import { Chart } from "chart.js/auto"
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -11,8 +10,7 @@ interface PieChartProps{
     datas:any[]
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+
 const PieChart:React.FC<PieChartProps>=({party,datas})=>{
     console.log("what?")
     Chart.register(ChartDataLabels);
