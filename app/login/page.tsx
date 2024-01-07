@@ -41,10 +41,10 @@ export default function Home() {
   // const router=useRouter()
   const handleLogin = () => {
     if (location) {
-      localStorage.setItem("pass", "sakib_is_awesome")
-      localStorage.setItem("location", location)
+      // localStorage.setItem("pass", "sakib_is_awesome")
+      // localStorage.setItem("location", location)
       setError(false)
-      router.push("./VoteCast")
+      router.push(`./VoteCast?${centerNumber}`)
     }
     else {
       setError(true)

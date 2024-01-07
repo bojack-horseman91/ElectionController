@@ -5,14 +5,17 @@ import {Input} from "@nextui-org/react";
 import {Button, ButtonGroup} from "@nextui-org/react"
 import Link from 'next/link'
 import {  Table,  TableHeader,  TableBody,  TableColumn,  TableRow,  TableCell} from "@nextui-org/react";
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import axios from 'axios'
-
+import names from "../login/voteCenters";
 
 import { useEffect, useState } from "react";
+import { Router } from "next/router";
+// import { useRouter } from "next/navigation";
 export default function Home() {
 
-
+  const searchParams = useSearchParams()
+  // console.log("important",searchParams.values())
   const getVoteCounts=async () => {
     // console.log(localStorage.getItem("location"))
     axios.defaults.baseURL = "https://shenbag-voting-app3.onrender.com"
@@ -21,7 +24,10 @@ export default function Home() {
     axios.defaults.headers.get["Access-Control-Allow-Credentials"]=true;
     axios.defaults.headers.get["Access-Control-Allow-Headers"]="X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
     // console.log(axios.defaults.headers)
-    const url=`/api/location/loc/?location=${localStorage.getItem("location")}`
+    console.log("sakib",searchParams.toString())
+    const numb=parseInt(searchParams.toString())
+    const loc=reversedNames[numb]
+    const url=`/api/location/loc/?location=${loc}`
     try {
       console.log(url)
       const response = await axios.get(url)
@@ -33,6 +39,7 @@ export default function Home() {
       console.log(error)
     }
   }
+  
   const sendVotes=async () => {
     // console.log(localStorage.getItem("location"))
     axios.defaults.baseURL = "https://shenbag-voting-app3.onrender.com"
@@ -41,7 +48,9 @@ export default function Home() {
     axios.defaults.headers.get["Access-Control-Allow-Credentials"]=true;
     axios.defaults.headers.get["Access-Control-Allow-Headers"]="X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
     // console.log(axios.defaults.headers)
-    const url=`/api/location/update/?location=${localStorage.getItem("location")}`
+    const numb=parseInt(searchParams.toString())
+    const loc=reversedNames[numb]
+    const url=`/api/location/update/?location=${loc}`
     try {
       console.log(url)
       const response = await axios.post(url,{"vote_count":voteCounts})
@@ -52,19 +61,44 @@ export default function Home() {
     }
   }
   const router=useRouter()
-  if(!localStorage.getItem("location")){
+ 
+  console.log(searchParams)
+  if(!searchParams){
     router.push("./login")
+    
   }
+  const reversedNames = Object.fromEntries(
+    Object.entries(names).map(([key, value]) => [value, key])
+  );
   
   
   const [voteCounts,setCount]=useState(null as any)
   const [myCount,setMyCount]=useState([])
   const [smt,setSmt]=useState(1)
   // const [password,setPassword]=useState("")
+  const pathname = usePathname()
+  // const searchParams = useSearchParams()
+ 
+  // useEffect(() => {
+  //   const url = `sakin${searchParams}`
+  //   console.log(url)
+  //   // You can now use the current URL
+  //   // ...
+  // }, [pathname, searchParams])
+  // const pathname = usePathname()
+  // const searchParams = useSearchParams()
+ 
+  useEffect(() => {
+    const url = `${pathname}?${searchParams}`
+    console.log("oiiiiiiiiiiiiii",url)
+    console.log("look",)
+    // You can now use the current URL
+    // ...
+  }, [pathname, searchParams])
   const [err,setError]=useState(false)
   useEffect(()=>{
     getVoteCounts()
-  },[])
+  },[searchParams])
   useEffect(()=>{
 
   },[voteCounts])
