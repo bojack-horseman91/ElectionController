@@ -11,6 +11,7 @@ import names from "../login/voteCenters";
 
 import { useEffect, useState } from "react";
 import { Router } from "next/router";
+import FullScreenSpinner from "@/components/Spinner";
 // import { useRouter } from "next/navigation";
 export default function Home() {
 
@@ -165,5 +166,5 @@ const onChangeHandler=(val:any,indx:number)=>{
      
      {/* </ButtonGroup> */}
     </main>
-  ):<>loading</>
+  ):<><FullScreenSpinner/></>
 }

@@ -1,6 +1,6 @@
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@nextui-org/react";
 interface MyTableProps {
-    voteCounts: {}
+    voteCounts: {String:number}
 }
 
 const MyTable: React.FC<MyTableProps> = ({ voteCounts }) => {
