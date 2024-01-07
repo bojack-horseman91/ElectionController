@@ -88,7 +88,7 @@ export default function Home() {
       </div>
     
      {/* <ButtonGroup> */}
-     <div className="flex flex-col justify-between space-y-2">
+     <div style={{width:"50%"}} className="flex flex-col justify-between space-y-2">
       <div style={{width:"100%", color:"white"}} className=" font-bold size-11 content-center justify-center ">Total Counts:</div>
       <PieChart datas={Object.values(totalCounts)} party={Object.keys(totalCounts)} />
       <BarChart datas={Object.values(totalCounts)} party={Object.keys(totalCounts)} />
