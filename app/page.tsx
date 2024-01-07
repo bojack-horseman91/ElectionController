@@ -24,7 +24,7 @@ export default function Home() {
        
         </Button>
         <Button title="next app" variant="solid" color="secondary" >
-        <Link href={"controller"}>
+        <Link href={"login"}>
           Cast Vote count
         </Link>
        
