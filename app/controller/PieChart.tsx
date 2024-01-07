@@ -17,17 +17,19 @@ const PieChart:React.FC<PieChartProps>=({party,datas})=>{
     // Chart.defaults.set('plugins.datalabels', {
     //     color: '#FE777B'
     //   });
-    const chartRef=useRef(null);
+    // const chartRef = useRef<Chart | null>(null); // Update the type for chartRef
+    const chartRef = useRef<HTMLCanvasElement| null>(null); // Update the type for chartRef
+    const currentChart = useRef<Chart | null>(null); // New variable to hold Chart instance
     useEffect(
         ()=>{
             console.log(chartRef)
             if(chartRef.current){
                 // const current:any=chartRef.current
-                const context=chartRef.current.getContext("2d");
+                const context=chartRef.current.getContext("2d") as CanvasRenderingContext2D;
                 // var chart:any=current.chart
                 console.log(context)
-                if(chartRef.current.chart){
-                    chartRef.current.chart.destroy()
+                if(currentChart.current ){
+                    currentChart.current.destroy()
                 }
                 
                 const newChart=new Chart(context,{
@@ -66,7 +68,7 @@ const PieChart:React.FC<PieChartProps>=({party,datas})=>{
                        
                     }
                 })
-                chartRef.current.chart=newChart
+                currentChart.current=newChart
 
             }
         },[datas]
